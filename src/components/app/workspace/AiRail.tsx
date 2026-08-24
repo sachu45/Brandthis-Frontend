@@ -2,12 +2,10 @@ import { useEffect, useRef } from 'react';
 import { useApp } from '../../../context/AppContext';
 
 const SUGGESTIONS = [
-  'Surprise me with a campaign idea',
-  'Give me ideas for a new post',
-  'Use my library',
+  { label: 'Surprise me', brief: 'Surprise me with a campaign idea' },
+  { label: 'Give me ideas', brief: 'Give me ideas for a new post' },
+  { label: 'Use my library', brief: 'Use my library' },
 ];
-
-const SUGGESTION_LABELS = ['Surprise me', 'Give me ideas', 'Use my library'];
 
 /** Right-hand generation panel: suggestions, brief composer, and credit spend. */
 export function AiRail({ onCollapse }: { onCollapse: () => void }) {
@@ -82,9 +80,12 @@ export function AiRail({ onCollapse }: { onCollapse: () => void }) {
         <h2>What will you create?</h2>
         <p>Send a brief to begin creating.</p>
         <div className="suggestions">
-          {SUGGESTIONS.map((suggestion, index) => (
-            <button key={suggestion} onClick={() => fillBrief(suggestion)}>
-              {SUGGESTION_LABELS[index]}
+          {SUGGESTIONS.map((suggestion) => (
+            <button
+              key={suggestion.label}
+              onClick={() => fillBrief(suggestion.brief)}
+            >
+              {suggestion.label}
             </button>
           ))}
         </div>

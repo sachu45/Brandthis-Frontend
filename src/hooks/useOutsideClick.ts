@@ -21,6 +21,7 @@ export function useOutsideClick(
 
     document.addEventListener('click', handleClick);
     return () => document.removeEventListener('click', handleClick);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // `refs` is intentionally not a dependency: callers pass a fresh array
+    // literal on every render, which would re-bind the listener each time.
   }, [active, onOutside]);
 }
